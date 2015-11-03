@@ -13,9 +13,11 @@ package Mikadoo::Template::CSSON::DbicResult::StringDetails {
 
     sub column_details_for_strings($self, $data_type) {
 
+        my $settings = {};
+
         DEFAULT:
         while(1) {
-            my $reply = $self->term_get_text('Default value', { shortcuts => [{ key => '[enter]', text => "Don't set" }, { key => '!', text => 'Set as null'}, { key => '_', text => 'Set as empty string'}});
+            my $reply = $self->term_get_text('Default value', { shortcuts => [{ key => '[enter]', text => "Don't set" }, { key => '!', text => 'Set as null'}, { key => '_', text => 'Set as empty string'}]});
             
             if(!defined $reply) {
                 last DEFAULT;
