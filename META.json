@@ -122,6 +122,14 @@
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult/Numeric.pm",
          "version" : "0.0001"
       },
+      "Mikadoo::Template::CSSON::DbicResult::StringDetails" : {
+         "file" : "lib/Mikadoo/Template/CSSON/DbicResult/StringDetails.pm",
+         "version" : "0.0001"
+      },
+      "Mikadoo::Template::CSSON::DbicResult::TimesDetails" : {
+         "file" : "lib/Mikadoo/Template/CSSON/DbicResult/TimesDetails.pm",
+         "version" : "0.0001"
+      },
       "Mikadoo::Template::CSSON::DbicSchema" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicSchema.pm",
          "version" : "0.0001"
