@@ -1,0 +1,79 @@
+% use experimental qw/postderef/;
+% my $self = shift;
+%
+% my $value_printer = begin
+%       my $column = shift;
+%       my $key = shift;
+%
+%       if(exists $column->{ $key }) {
+%           my $value = $column->{ $key };
+%           if(!defined $value) {
+                            <%= $key %> => undef,
+%           }
+%           elsif(ref $value eq 'ARRAY') {
+                            <%= $key %> => [<%= join ', ' => map { $_ =~ m{^[.\d]+$} ? $_ : "'$_'" } @$value %>],
+%           }
+%           elsif($value =~ m{^[.\d]+$}) {
+                            <%= $key %> => <%= $value %>,
+%           }
+%           else {
+                            <%= $key %> => '<%= delete $column->{ $key } %>',
+%           }
+%       }
+% end
+%   if($self->has_perl_version) {
+                    use <%= $self->perl_version %>;
+%   }
+                    use strict;
+                    use warnings;
+
+                    package <%= $self->namespace %>::Result::<%= $self->result_name %> {
+
+                        # VERSION
+                        # ABSTRACT: ...
+
+%   if($self->result_use_type eq 'Candy') {
+                        <%= $self->result_use_string %> -components => [qw/
+                        /];
+%   }
+%   else {
+                        <%= $self->result_use_string %>;
+%   }
+%   if($self->has_experimentals) {
+                        use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
+%   }
+
+%   for my $columndata ($self->all_columns) {
+%       my $column = { %$columndata };
+                        <%= $column->{'_keyword'} %> <%= $column->{'_name'} %> => {
+%       for my $key (qw/data_type is_foreign_key is_auto_increment is_nullable size default_value/) {
+                            <%= $value_printer->($column, $key) =%>
+%       }
+%       if(exists $column->{'extra'}) {
+                            extra => {
+%           for my $key (sort keys $column->{'extra'}->%*) {
+                                <%= '    ' . $value_printer->($column->{'extra'}, $key) =%>
+%           }
+                            },
+%       }
+                        };
+%   }
+}
+
+1;
+
+<%= '__END__' %>
+
+=pod
+
+=head1 SYNOPSIS
+
+    use <%= $self->namespace %>::Result::<%= $self->result_name %>;
+
+=head1 DESCRIPTION
+
+<%= $self->namespace %>::Result::<%= $self->result_name %> is ...
+
+=head1 SEE ALSO
+
+=cut

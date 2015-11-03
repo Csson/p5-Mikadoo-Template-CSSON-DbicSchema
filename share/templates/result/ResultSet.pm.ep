@@ -1,0 +1,45 @@
+% use experimental qw/postderef/;
+% my $self = shift;
+%
+%   if($self->has_perl_version) {
+                    use <%= $self->perl_version %>;
+%   }
+                    use strict;
+                    use warnings;
+
+                    package <%= $self->namespace %>::ResultSet::<%= $self->result_name %> {
+
+                        # VERSION
+                        # ABSTRACT: ...
+
+%   if($self->resultset_use_type eq 'Candy') {
+                        <%= $self->resultset_use_string %> -components => [qw/
+                        /];
+%   }
+%   else {
+                        <%= $self->resultset_use_string %>;
+%   }
+%   if($self->has_experimentals) {
+                        use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
+%   }
+
+}
+
+1;
+
+<%= '__END__' %>
+
+=pod
+
+=head1 SYNOPSIS
+
+    use <%= $self->namespace %>::ResultSet::<%= $self->result_name %>;
+
+=head1 DESCRIPTION
+
+<%= $self->namespace %>::ResultSet::<%= $self->result_name %> is ...
+
+=head1 SEE ALSO
+
+=cut
+
