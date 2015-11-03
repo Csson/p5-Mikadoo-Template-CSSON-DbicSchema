@@ -46,15 +46,17 @@
 %   for my $columndata ($self->all_columns) {
 %       my $column = { %$columndata };
                         <%= $column->{'_keyword'} %> <%= $column->{'_name'} %> => {
-%       for my $key (qw/data_type is_foreign_key is_auto_increment is_nullable size default_value/) {
+%       for my $key ($self->all_allowed_column_attributes) {
+%           if($key ne 'extra') {
                             <%= $value_printer->($column, $key) =%>
-%       }
-%       if(exists $column->{'extra'}) {
-                            extra => {
-%           for my $key (sort keys $column->{'extra'}->%*) {
-                                <%= '    ' . $value_printer->($column->{'extra'}, $key) =%>
 %           }
+%           else {
+                            extra => {
+%               for my $key (sort keys $column->{'extra'}->%*) {
+                                <%= '    ' . $value_printer->($column->{'extra'}, $key) =%>
+%               }
                             },
+%           }
 %       }
                         };
 %   }

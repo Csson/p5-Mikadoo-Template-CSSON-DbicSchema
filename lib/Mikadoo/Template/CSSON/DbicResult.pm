@@ -21,8 +21,9 @@ package Mikadoo::Template::CSSON::DbicResult {
     use Hash::Merge 'merge';
     use syntax 'junction';
     use Module::Load 'load';
-    use Mojo::Util 'dumper';
     use File::ShareDir::Tarball 'dist_dir';
+    use Set::Scalar;
+    use Mojo::Util 'dumper';
     use experimental qw/signatures postderef/;
 
 
@@ -31,6 +32,7 @@ package Mikadoo::Template::CSSON::DbicResult {
         isa => ArrayRef,
         default => sub { [] },
         traits => ['Array'],
+        clearer => 1,
         handles => {
             all_columns => 'elements',
             add_column => 'push',
@@ -66,6 +68,17 @@ package Mikadoo::Template::CSSON::DbicResult {
         is => 'rw',
         isa => Any,
     );
+    has allowed_column_attributes => (
+        is => 'ro',
+        isa => ArrayRef,
+        init_arg => undef,
+        traits => ['Array'],
+        default => sub { [qw/data_type is_foreign_key is_auto_increment unsigned is_nullable size default_value extra/] },
+        handles => {
+            all_allowed_column_attributes => 'elements',
+        },
+    );
+    
 
     sub run($self) {
         $self->dist('Mikadoo-Template-CSSON-Dbic');
@@ -76,21 +89,22 @@ package Mikadoo::Template::CSSON::DbicResult {
         }
 
         $self->setup_use_statements;
+        $self->ask_perl_version({ from => 14 });
+        $self->ask_experimentals;
 
         RESULT:
         while(1) {
 
             $self->result_name($self->term_get_text('Name of result source'));
-            $self->ask_perl_version({ from => 14 });
-            $self->ask_experimentals;
             $self->enter_columns;
     
             $self->initialize_directories;
     
             $self->render(path(qw/result Result.pm.ep/) => $self->result_path);
             $self->render(path(qw/result ResultSet.pm.ep/) => $self->resultset_path);
+            $self->clear_columns;
 
-            my $reply = $self->term_get_one('Create more result classes?', [qw/yes no/], default => 'yes');
+            my $reply = $self->term_get_one('Create more result classes?', [qw/yes no/], 'yes');
             last RESULT if $reply ne 'yes';
         }
         say 'Bye.';
@@ -229,7 +243,14 @@ package Mikadoo::Template::CSSON::DbicResult {
         return {} if !defined $group_name;
 
         my $method = "column_details_for_$group_name";
-        return $self->$method($data_type);
+        my $column_definition = $self->$method($data_type);
+
+        my $not_allowed_attributes =  Set::Scalar->new(keys %$column_definition) - Set::Scalar->new($self->all_allowed_column_attributes);
+        if($not_allowed_attributes) {
+            say "Warning: The following attributes are not used: $not_allowed_attributes";
+        }
+
+        return $column_definition;
 
     }
 

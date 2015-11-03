@@ -8,18 +8,19 @@ package Mikadoo::Template::CSSON::DbicResult::Numeric {
     # ABSTRACT: Short intro
 
     use Moose::Role;
+    use syntax 'junction';
+    use Mojo::Util 'dumper';
     use experimental qw/postderef signatures/;
 
-    sub setup_numeric_attributes($self, $data_type) {
-        my $attributes = $self->term_get_multi('Attributes', [qw/is_auto_increment unsigned is_nullable zerofill none/], ['none']);
+    sub setup_numeric_attributes($self) {
+
+        # If attributes are added, also update the template.
+        my $attributes = [map { split m/ \+ / } $self->term_get_multi('Attributes', ['is_auto_increment + unsigned', qw/is_auto_increment unsigned is_nullable zerofill none/], ['none'])->@*];
         my $settings = {
             is_numeric => 1,
         };
 
-        $settings->{'is_auto_increment'} = 1 if any(@$attributes) eq 'is_auto_increment';
-        $settings->{'is_nullable'} = 1 if any(@$attributes) eq 'is_nullable';
-        $settings->{'extra'}{'unsigned'} = 1 if any(@$attributes) eq 'unsigned';
-        $settings->{'extra'}{'zerofill'} = 1 if any(@$attributes) eq 'zerofill';
+        $settings->{ $_ } = 1 for @$attributes;
 
         return $settings;
     }

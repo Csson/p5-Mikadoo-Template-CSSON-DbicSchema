@@ -118,6 +118,10 @@
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult/IntegerDetails.pm",
          "version" : "0.0001"
       },
+      "Mikadoo::Template::CSSON::DbicResult::Numeric" : {
+         "file" : "lib/Mikadoo/Template/CSSON/DbicResult/Numeric.pm",
+         "version" : "0.0001"
+      },
       "Mikadoo::Template::CSSON::DbicSchema" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicSchema.pm",
          "version" : "0.0001"
