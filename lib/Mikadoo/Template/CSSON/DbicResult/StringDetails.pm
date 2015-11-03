@@ -13,7 +13,9 @@ package Mikadoo::Template::CSSON::DbicResult::StringDetails {
 
     sub column_details_for_strings($self, $data_type) {
 
-        my $settings = {};
+        my $settings = {
+            numeric => 0,
+        };
 
         DEFAULT:
         while(1) {
@@ -28,7 +30,7 @@ package Mikadoo::Template::CSSON::DbicResult::StringDetails {
             }
             elsif($reply eq '_') {
                 $settings->{'default_value'} = '';
-                next DEFAULT;
+                last DEFAULT;
             }
             $settings->{'default_value'} = $reply;
             last DEFAULT;
