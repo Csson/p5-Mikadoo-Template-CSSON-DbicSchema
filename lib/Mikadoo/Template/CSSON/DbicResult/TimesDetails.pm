@@ -24,7 +24,7 @@ package Mikadoo::Template::CSSON::DbicResult::TimesDetails {
             return $settings;
         }
 
-        $settings->{ $_ } = 1 for @$attributes;
+        $settings->{ $_ } = 1 for @$updatables;
 
         return $settings;
     }
