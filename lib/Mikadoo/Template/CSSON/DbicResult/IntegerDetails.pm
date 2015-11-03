@@ -8,18 +8,11 @@ package Mikadoo::Template::CSSON::DbicResult::IntegerDetails {
     # ABSTRACT: Short intro
 
     use Moose::Role;
+    with qw/Mikadoo::Template::CSSON::DbicResult::Numeric/;
     use experimental qw/postderef signatures/;
 
     sub column_details_for_integers($self, $data_type) {
-        my $attributes = $self->term_get_multi('Attributes', [qw/is_auto_increment unsigned is_nullable zerofill none/], ['none']);
-        my $settings = {
-            is_numeric => 1,
-        };
-
-        $settings->{'is_auto_increment'} = 1 if any(@$attributes) eq 'is_auto_increment';
-        $settings->{'is_nullable'} = 1 if any(@$attributes) eq 'is_nullable';
-        $settings->{'extra'}{'unsigned'} = 1 if any(@$attributes) eq 'unsigned';
-        $settings->{'extra'}{'zerofill'} = 1 if any(@$attributes) eq 'zerofill';
+        my $settings = $self->setup_numeric_attributes;
 
         DEFAULT:
         while(1) {
