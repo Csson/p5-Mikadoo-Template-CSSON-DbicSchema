@@ -42,15 +42,15 @@ package Mikadoo::Template::CSSON::DbicResult::DecimalDetails {
 
             LOOP:
             while(1) {
-                my $number_of_digits = $self->term_get_text($question);
+                my $number_of_digits = $self->term_get_text($question, { shortucts => [{ key => '[enter]', text => "Don't set" }]});
 
-                next LOOP if !defined $number_of_digits;
+                next QUESTION if !defined $number_of_digits;
                 if($number_of_digits =~ m{\D}) {
                     say 'Only integers allowed';
                     next LOOP;
                 }
                 elsif($number_of_digits < 0) {
-                    say 'Only positive integers allowed';
+                    say 'Only non-negative integers allowed';
                     next LOOP;
                 }
                 push @$size => $number_of_digits;
@@ -58,7 +58,11 @@ package Mikadoo::Template::CSSON::DbicResult::DecimalDetails {
             }
         }
 
-        $settings->{'size'} = scalar @$size == 1 ? $size->[0] : $size;
+        if(scalar @$size) {
+            $settings->{'size'} = scalar @$size == 1 ? $size->[0] : $size;
+        }
+
+        return $settings;
     }
 }
 

@@ -11,6 +11,8 @@ package Mikadoo::Template::CSSON::DbicResult {
     extends 'App::Mikadoo';
     with qw/
         Mikadoo::Template::CSSON::DbicResult::IntegerDetails
+        Mikadoo::Template::CSSON::DbicResult::DecimalDetails
+        Mikadoo::Template::CSSON::DbicResult::StringDetails
     /;
     use MooseX::AttributeShortcuts;
     use Path::Tiny;
@@ -73,7 +75,7 @@ package Mikadoo::Template::CSSON::DbicResult {
         isa => ArrayRef,
         init_arg => undef,
         traits => ['Array'],
-        default => sub { [qw/data_type is_foreign_key is_auto_increment unsigned is_nullable size default_value extra/] },
+        default => sub { [qw/data_type is_foreign_key is_auto_increment unsigned is_nullable size default_value extra is_numeric/] },
         handles => {
             all_allowed_column_attributes => 'elements',
         },
@@ -151,6 +153,10 @@ package Mikadoo::Template::CSSON::DbicResult {
         if($column->{'data_type'} ne 'free text') {
             $column = merge($column, $self->column_details_for_type($column->{'data_type'}));
         }
+
+        # Some data types has "(..)" in the data type question. Should not
+        # feed that to DBIx::Class
+        $column->{'data_type'} =~ s{\([^\)]*\)}{};
 
         return $column;
 
