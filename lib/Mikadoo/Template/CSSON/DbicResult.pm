@@ -9,6 +9,9 @@ package Mikadoo::Template::CSSON::DbicResult {
 
     use MooseX::App::Command;
     extends 'App::Mikadoo';
+    with qw/
+        Mikadoo::Template::CSSON::DbicResult::IntegerDetails
+    /;
     use MooseX::AttributeShortcuts;
     use Path::Tiny;
     use Try::Tiny;
@@ -19,6 +22,7 @@ package Mikadoo::Template::CSSON::DbicResult {
     use syntax 'junction';
     use Module::Load 'load';
     use Mojo::Util 'dumper';
+    use File::ShareDir::Tarball 'dist_dir';
     use experimental qw/signatures postderef/;
 
 
@@ -31,6 +35,7 @@ package Mikadoo::Template::CSSON::DbicResult {
             all_columns => 'elements',
             add_column => 'push',
             find_column => 'first',
+            sort_columns => 'sort',
         },
     );
 
@@ -63,8 +68,7 @@ package Mikadoo::Template::CSSON::DbicResult {
     );
 
     sub run($self) {
-       # $self->dir(__DIR__);
-        $self->dist('Mikadoo-Template-DbicResult');
+        $self->dist('Mikadoo-Template-CSSON-Dbic');
         $self->namespace_under('lib');
 
         if($self->location->realpath->stringify !~ m{/Schema$}) {
@@ -73,30 +77,36 @@ package Mikadoo::Template::CSSON::DbicResult {
 
         $self->setup_use_statements;
 
-        $self->result_name($self->term_get_text('Name of result source'));
-        $self->ask_perl_version({ from => 14 });
-        $self->ask_experimentals;
-        $self->enter_columns;
+        RESULT:
+        while(1) {
 
-        $self->initialize_directories;
+            $self->result_name($self->term_get_text('Name of result source'));
+            $self->ask_perl_version({ from => 14 });
+            $self->ask_experimentals;
+            $self->enter_columns;
+    
+            $self->initialize_directories;
+    
+            $self->render(path(qw/result Result.pm.ep/) => $self->result_path);
+            $self->render(path(qw/result ResultSet.pm.ep/) => $self->resultset_path);
 
-        $self->render(path(qw/result Result.pm.ep/) => $self->result_path);
-        $self->render(path(qw/result ResultSet.pm.ep/) => $self->resultset_path);
+            my $reply = $self->term_get_one('Create more result classes?', [qw/yes no/], default => 'yes');
+            last RESULT if $reply ne 'yes';
+        }
+        say 'Bye.';
     }
 
     sub enter_columns($self) {
 
         COLUMN:
         while(1) {
-            my $column_name = $self->term_get_text('Column name');
+            my $column_name = $self->term_get_text('Column name', { shortcuts => [{ key => '.', text => 'No more column'}, { key => '?', text => 'Show added columns'}]});
             if($column_name eq '.') {
                 last COLUMN;
             }
             if($column_name eq '?') {
-                say 'Columns:';
-                for my $column ($self->all_columns) {
-                    say "  $column";
-                }
+                $self->print_columns_verbose;
+                next COLUMN;
             }
             if($self->find_column(sub { $_ eq $column_name })) {
                 say "Column $column_name already exists. Try again.";
@@ -223,51 +233,6 @@ package Mikadoo::Template::CSSON::DbicResult {
 
     }
 
-    sub column_details_for_integers($self, $data_type) {
-        my $attributes = $self->term_get_multi('Attributes', [qw/is_auto_increment unsigned is_nullable zerofill none/], ['none']);
-        my $settings = {
-            is_numeric => 1,
-        };
-
-        $settings->{'is_auto_increment'} = 1 if any(@$attributes) eq 'is_auto_increment';
-        $settings->{'is_nullable'} = 1 if any(@$attributes) eq 'is_nullable';
-        $settings->{'extra'}{'unsigned'} = 1 if any(@$attributes) eq 'unsigned';
-        $settings->{'extra'}{'zerofill'} = 1 if any(@$attributes) eq 'zerofill';
-
-        DEFAULT:
-        while(1) {
-            my $reply = $self->term_get_text(['Default value', ". : Don't set", '! : Set as null']);
-            
-            if($reply eq '.') {
-                last DEFAULT if $reply eq '.';
-            }
-            if($reply eq '!') {
-                $settings->{'default_value'} = undef;
-                last DEFAULT if $reply eq '!';
-            }
-            if($reply =~ m{\D}) {
-                say 'Only integers';
-                next DEFAULT;
-            }
-            $settings->{'default_value'} = $reply;
-            last DEFAULT;
-        }
-
-        DISPLAY_WIDTH:
-        while(1) {
-            my $reply = $self->term_get_text(['Max display width', '0..255', "[enter] : don't set'"]);
-            last DISPLAY_WIDTH if !defined $reply;
-
-            if($reply !~ m{\D} && $reply >= 0 && $reply <= 255) {
-                $settings->{'size'} = $reply;
-                last DISPLAY_WIDTH;
-            }
-            say 'Illegal value';
-        }
-
-        return $settings;
-    }
-
     sub setup_use_statements($self) {
 
         my $global_result_class = join '::' => $self->namespace, 'Result';
@@ -289,7 +254,7 @@ package Mikadoo::Template::CSSON::DbicResult {
         }
         catch {
             say "Note: No custom $global_result_class class found. Inherits from DBIx::Class::Core."; 
-            $self->result_use_string("use parent 'DBIx::Class::Core';");
+            $self->result_use_string("use parent 'DBIx::Class::Core'");
             $self->result_use_type('Core');
         };
 
@@ -312,9 +277,21 @@ package Mikadoo::Template::CSSON::DbicResult {
         }
         catch {
             say "Note: No custom $global_resultset_class class found. Inherits from DBIx::Class::ResultSet."; 
-            $self->resultset_use_string("use parent 'DBIx::Class::ResultSet';");
+            $self->resultset_use_string("use parent 'DBIx::Class::ResultSet'");
             $self->resultset_use_type('Core');
         };
+    }
+
+    sub print_columns_verbose($self) {
+        say 'Columns:';
+
+        my $longest_name = ($self->sort_columns(sub { length $_[1]->{'_name'} <=> length $_[0]->{'_name'} }))[0];
+        my $name_length = length $longest_name;
+        for my $column ($self->all_columns) {
+            say sprintf "%2s %-${name_length}s  %s", ($column->{'_keyword'} eq 'primary_column' ? 'pk' : $column->{'_keyword'} eq 'unique_column' ? 'uq' : ''),
+                                                     $column->{'_name'},
+                                                     $column->{'data_type'};
+        }
     }
 }
 

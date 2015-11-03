@@ -2,7 +2,7 @@
 doctype: dist
 
 header:
-  name: Mikadoo-Template-DbicSchema-CSSON
+  name: Mikadoo-Template-CSSON-Dbic
   author:
     - Erik Carlsson <info@code301.com>
   license: Perl_5
@@ -20,6 +20,9 @@ plugins:
   - +add_plugin: TravisYML
     +before: Git::Tag
     perl_version: 5.16 5.20
+
+  - +replace_plugin: ShareDir
+    +with: ShareDir::Tarball
 
 ---
 doctype: weaver

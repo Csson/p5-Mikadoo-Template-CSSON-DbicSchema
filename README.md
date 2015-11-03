@@ -1,30 +1,30 @@
 # NAME
 
-Mikadoo::Template::DbicSchema::CSSON - Short intro
+Mikadoo::Template::CSSON::DbicResult - Short intro
 
-![Requires Perl unknown](https://img.shields.io/badge/perl-unknown-brightgreen.svg) [![Travis status](https://api.travis-ci.org//.svg?branch=master)](https://travis-ci.org//)
+![Requires Perl 5.16+](https://img.shields.io/badge/perl-5.16+-brightgreen.svg) [![Travis status](https://api.travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema.svg?branch=master)](https://travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema)
 
 # VERSION
 
-Version 0.0001, released 2015-11-02.
+Version 0.0001, released 2015-11-03.
 
 # SYNOPSIS
 
-    use Mikadoo::Template::DbicSchema::CSSON;
+    use Mikadoo::Template::DbicResult;
 
 # DESCRIPTION
 
-Mikadoo::Template::DbicSchema::CSSON is ...
+Mikadoo::Template::DbicResult is ...
 
 # SEE ALSO
 
 # SOURCE
 
-[https://github.com/Csson/p5-Mikadoo-Template-DbicSchema-CSSON](https://github.com/Csson/p5-Mikadoo-Template-DbicSchema-CSSON)
+[https://github.com/Csson/p5-Mikadoo-Template-CSSON-DbicSchema](https://github.com/Csson/p5-Mikadoo-Template-CSSON-DbicSchema)
 
 # HOMEPAGE
 
-[https://metacpan.org/release/Mikadoo-Template-DbicSchema-CSSON](https://metacpan.org/release/Mikadoo-Template-DbicSchema-CSSON)
+[https://metacpan.org/release/Mikadoo-Template-CSSON-Dbic](https://metacpan.org/release/Mikadoo-Template-CSSON-Dbic)
 
 # AUTHOR
 

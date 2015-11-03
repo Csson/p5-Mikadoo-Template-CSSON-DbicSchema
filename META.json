@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "Mikadoo-Template-DbicSchema-CSSON",
+   "name" : "Mikadoo-Template-CSSON-Dbic",
    "no_index" : {
       "directory" : [
          "t",
@@ -26,7 +26,8 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "0"
+            "ExtUtils::MakeMaker" : "0",
+            "File::ShareDir::Install" : "0.06"
          }
       },
       "develop" : {
@@ -64,7 +65,7 @@
             "Dist::Zilla::Plugin::ReadmeAnyFromPod" : "0",
             "Dist::Zilla::Plugin::ReversionOnRelease" : "0",
             "Dist::Zilla::Plugin::RunExtraTests" : "0",
-            "Dist::Zilla::Plugin::ShareDir" : "0",
+            "Dist::Zilla::Plugin::ShareDir::Tarball" : "0",
             "Dist::Zilla::Plugin::Test::ReportPrereqs" : "0",
             "Dist::Zilla::Plugin::TestRelease" : "0",
             "Dist::Zilla::Plugin::TravisYML" : "0",
@@ -105,21 +106,25 @@
       }
    },
    "provides" : {
-      "Mikadoo::Template::DbicSchema::CSSON" : {
-         "file" : "lib/Mikadoo/Template/DbicSchema/CSSON.pm",
+      "Mikadoo::Template::CSSON::DbicResult" : {
+         "file" : "lib/Mikadoo/Template/CSSON/DbicResult.pm",
+         "version" : "0.0001"
+      },
+      "Mikadoo::Template::CSSON::DbicSchema" : {
+         "file" : "lib/Mikadoo/Template/CSSON/DbicSchema.pm",
          "version" : "0.0001"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/Csson/p5-Mikadoo-Template-DbicSchema-CSSON/issues"
+         "web" : "https://github.com/Csson/p5-Mikadoo-Template-CSSON-DbicSchema/issues"
       },
-      "homepage" : "https://metacpan.org/release/Mikadoo-Template-DbicSchema-CSSON",
+      "homepage" : "https://metacpan.org/release/Mikadoo-Template-CSSON-Dbic",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/Csson/p5-Mikadoo-Template-DbicSchema-CSSON.git",
-         "web" : "https://github.com/Csson/p5-Mikadoo-Template-DbicSchema-CSSON"
+         "url" : "https://github.com/Csson/p5-Mikadoo-Template-CSSON-DbicSchema.git",
+         "web" : "https://github.com/Csson/p5-Mikadoo-Template-CSSON-DbicSchema"
       }
    },
    "version" : "0.0001"
