@@ -1,0 +1,57 @@
+%   if($self->has_perl_version) {
+                    use <%= $self->perl_version %>;
+%   }
+                    use strict;
+                    use warnings;
+
+                    package <%= $self->namespace =%>::Schema::Meta::ResultBase {
+
+                        # VERSION
+                        # ABSTRACT: ...
+
+                        use base 'DBIx::Class::Sweeten::Result';
+
+                        __PACKAGE__->load_components(qw/
+                            Helper::Row::RelationshipDWIM
+                            InflateColumn::DateTime::WithTimeZone
+                        /);
+
+                        sub base { $_[1] || '<%= $self->namespace =%>::Schema::Meta::ResultBase' }
+
+                        sub default_result_namespace { '<%= $self->namespace =%>::Schema::Result' }
+
+%   if($self->has_perl_version) {
+                        sub perl_version { $self->perl_version_short }
+%   }
+
+%   if($self->has_experimentals) {
+                        sub experimental {
+                            qw/
+%       for my $experimental ($self->all_experimentals) {
+                                <%= $experimental %>
+%       }
+                            /;
+                        }
+%   }
+
+                    }
+
+                    1;
+
+<%= '__END__' %>
+
+=pod
+
+=head1 SYNOPSIS
+
+    use <%= $self->namespace %>::Schema::Meta::Result;
+
+=head1 DESCRIPTION
+
+<%= $self->namespace %>::Schema::Meta::Result is the DBIx::Class::Candy based class all result classes in the L<<%= $self->namespace %>> namespace uses.
+
+=head1 SEE ALSO
+
+=cut
+
+

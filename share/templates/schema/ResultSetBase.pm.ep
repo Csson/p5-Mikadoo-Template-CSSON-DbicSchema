@@ -1,0 +1,39 @@
+%   if($self->has_perl_version) {
+                    use <%= $self->perl_version %>;
+%   }
+                    use strict;
+                    use warnings;
+
+                    package <%= $self->namespace %>::Schema::Meta::ResultSetBase {
+
+                        # VERSION
+                        # ABSTRACT: ...
+
+                        use base 'DBIx::Class::ResultSet';
+
+                        __PACKAGE__->load_components(qw/
+                            Helper::ResultSet
+                            Helper::ResultSet::OneRow
+                            Helper::ResultSet::Bare
+                        /);
+
+                    }
+
+1;
+
+<%= '__END__' %>
+
+=pod
+
+=head1 SYNOPSIS
+
+    use base '<%= $self->namespace %>::Schema::Meta::ResultSetBase';
+
+=head1 DESCRIPTION
+
+<%= $self->namespace %>::Schema::Meta::ResultSetBase is the base class for resultsets in the L<<%= $self->namespace %>> namespace.
+
+=head1 SEE ALSO
+
+=cut
+

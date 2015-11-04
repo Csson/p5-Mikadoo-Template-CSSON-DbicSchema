@@ -1,0 +1,44 @@
+%   if($self->has_perl_version) {
+                    use <%= $self->perl_version %>;
+%   }
+                    use strict;
+                    use warnings;
+
+                    package <%= $self->namespace %>::Schema::Meta::ResultSet {
+
+                        # VERSION
+                        # ABSTRACT: ...
+
+                        use base 'DBIx::Class::Candy::ResultSet';
+
+                        sub base { $_[1] || '<%= $self->namespace %>::Schema::Meta::ResultSetBase' }
+
+%   if($self->has_perl_version) {
+                        sub perl_version { $self->perl_version_short }
+%   }
+
+                        sub experimental {
+                            [qw/
+                                signatures
+                                postderef
+                            /];
+                        }
+                    }
+
+1;
+
+<%= '__END__' %>
+
+=pod
+
+=head1 SYNOPSIS
+
+    use base '<%= $self->namespace %>::Schema::Meta::ResultSet';
+
+=head1 DESCRIPTION
+
+<%= $self->namespace %>::Schema::Meta::ResultSet is the DBIx::Class::Candy based class all resultsets in the L<<%= $self->namespace %>> namespace uses.
+
+=head1 SEE ALSO
+
+=cut

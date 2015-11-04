@@ -5,17 +5,23 @@
                     use warnings;
 
                     package <%= $self->namespace %>::Config {
+
+                        # VERSION
+                        # ABSTRACT: ...
+
                         use Moo;
                         with 'Config::FromHash::Auto';
                         use Dir::Self;
-
+%   if($self->has_experimentals) {
+                        use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
+%   }
                         sub package { __PACKAGE__ }
                         sub dir { __DIR__ }
 
                     }
 
                     1;
-                    
+
 <%= '__END__' %>
 
 =pod

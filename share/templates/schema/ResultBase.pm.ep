@@ -1,0 +1,34 @@
+%   if($self->has_perl_version) {
+                    use <%= $self->perl_version %>;
+%   }
+                    use strict;
+                    use warnings;
+
+                    package <%= $self->namespace =%>::Schema::Meta::ResultBase {
+
+                        # VERSION
+                        # ABSTRACT: ...
+
+                        use base 'DBIx::Class::Sweeten::Result::Base';
+%   if($self->has_experimentals) {
+                        use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
+%   }
+                    }
+
+                    1;
+
+<%= '__END__' %>
+
+=pod
+
+=head1 SYNOPSIS
+
+    use base '<%= $self->namespace %>::Schema::Result';
+
+=head1 DESCRIPTION
+
+<%= $self->namespace %>::Schema::Result is the base class for result sources in the L<<%= $self->namespace %>> namespace.
+
+=head1 SEE ALSO
+
+=cut
