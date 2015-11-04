@@ -6,7 +6,7 @@ Mikadoo::Template::CSSON::DbicResult - Short intro
 
 # VERSION
 
-Version 0.0001, released 2015-11-03.
+Version 0.0001, released 2015-11-04.
 
 # SYNOPSIS
 

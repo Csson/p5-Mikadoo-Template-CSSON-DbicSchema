@@ -14,7 +14,7 @@ package Mikadoo::Template::CSSON::DbicResult::StringDetails {
     sub column_details_for_strings($self, $data_type) {
 
         my $settings = {
-            numeric => 0,
+            is_numeric => 0,
         };
 
         DEFAULT:

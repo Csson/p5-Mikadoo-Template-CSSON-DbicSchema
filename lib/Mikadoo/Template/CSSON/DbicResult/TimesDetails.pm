@@ -11,11 +11,16 @@ package Mikadoo::Template::CSSON::DbicResult::TimesDetails {
     use syntax 'junction';
     use experimental qw/postderef signatures/;
 
-    sub column_details_for_strings($self, $data_type) {
+    sub column_details_for_times($self, $data_type) {
 
         my $settings = {
-            numeric => 0,
+            is_numeric => 0,
         };
+
+        # No two-digit years here
+        if($data_type eq 'year') {
+            $settings->{'size'} = 4;
+        }
 
         my $updatables = $self->term_get_multi('Update value on', [qw/set_on_create set_on_update none/], 'set_on_create');
 

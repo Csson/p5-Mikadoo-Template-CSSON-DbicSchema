@@ -10,12 +10,45 @@ package Mikadoo::Template::CSSON::DbicSchema {
     use MooseX::App::Command;
     extends 'App::Mikadoo';
     use File::ShareDir::Tarball 'dist_dir';
+    use Path::Tiny;
     use experimental qw/postderef signatures/;
 
     sub run($self) {
-        $self->dist(__PACKAGE__ =~ s{::}{-}rg);
+        $self->dist('Mikadoo-Template-CSSON-Dbic');
 
         $self->namespace_under('lib');
+
+        $self->ask_perl_version({ from => 14 });
+        $self->ask_experimentals;
+
+        my $meta_location = path($self->location, qw<Schema Meta Dummy.pm>);
+        $self->ensure_parents_exist($meta_location);
+
+        $self->render(path(qw/schema Schema.pm.ep/) => path($self->location, 'Schema.pm'));
+
+        for my $file (qw<Result.pm ResultSet.pm ResultBase.pm ResultSetBase.pm>) {
+            $self->render(path(qw<schema $file.ep>) => path($meta_location, $file));
+        }
+=pod
+
+        RESULT:
+        while(1) {
+
+            $self->result_name($self->term_get_text('Name of result source'));
+            $self->enter_columns;
+    
+            $self->initialize_directories;
+    
+            $self->render(path(qw/result Result.pm.ep/) => $self->result_path);
+            $self->render(path(qw/result ResultSet.pm.ep/) => $self->resultset_path);
+            $self->clear_columns;
+
+            my $reply = $self->term_get_one('Create more result classes?', [qw/yes no/], 'yes');
+            last RESULT if $reply ne 'yes';
+        }
+=cut
+        say 'Bye.';
+
     }
 
 }

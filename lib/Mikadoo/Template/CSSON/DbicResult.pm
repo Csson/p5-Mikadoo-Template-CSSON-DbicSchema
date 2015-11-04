@@ -13,6 +13,7 @@ package Mikadoo::Template::CSSON::DbicResult {
         Mikadoo::Template::CSSON::DbicResult::IntegerDetails
         Mikadoo::Template::CSSON::DbicResult::DecimalDetails
         Mikadoo::Template::CSSON::DbicResult::StringDetails
+        Mikadoo::Template::CSSON::DbicResult::TimesDetails
     /;
     use MooseX::AttributeShortcuts;
     use Path::Tiny;
@@ -75,7 +76,7 @@ package Mikadoo::Template::CSSON::DbicResult {
         isa => ArrayRef,
         init_arg => undef,
         traits => ['Array'],
-        default => sub { [qw/data_type is_foreign_key is_auto_increment unsigned is_nullable size default_value extra is_numeric/] },
+        default => sub { [qw/data_type is_foreign_key is_auto_increment unsigned is_nullable size default_value set_on_update set_on_create extra is_numeric/] },
         handles => {
             all_allowed_column_attributes => 'elements',
         },
