@@ -266,7 +266,7 @@ package Mikadoo::Template::CSSON::DbicResult {
     sub setup_use_statements($self) {
 
         RESULT_CLASS:
-        for my $global_result_class_name ('Result', 'Meta::Result') {
+        for my $global_result_class_name ('Result', 'Result') {
             my $global_result_class = join '::' => $self->namespace, $global_result_class_name;
 
             try {
@@ -298,7 +298,7 @@ package Mikadoo::Template::CSSON::DbicResult {
         say "Found global result class of type " . $self->result_use_type;
 
         RESULTSET_CLASS:
-        for my $global_resultset_class_name ('ResultSet', 'Meta::ResultSet') {
+        for my $global_resultset_class_name ('ResultSet', 'ResultSet') {
             my $global_resultset_class = join '::' => $self->namespace, $global_resultset_class_name;
 
             try {

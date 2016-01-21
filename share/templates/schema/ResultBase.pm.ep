@@ -5,7 +5,7 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::Meta::ResultBase {
+                    package <%= $self->namespace %>::Schema::ResultBase {
 
                         # VERSION
                         # ABSTRACT: ...

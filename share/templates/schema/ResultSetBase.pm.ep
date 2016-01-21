@@ -5,7 +5,7 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::Meta::ResultSetBase {
+                    package <%= $self->namespace %>::Schema::ResultSetBase {
 
                         # VERSION
                         # ABSTRACT: ...
@@ -28,11 +28,11 @@
 
 =head1 SYNOPSIS
 
-    use base '<%= $self->namespace %>::Schema::Meta::ResultSetBase';
+    use base '<%= $self->namespace %>::Schema::ResultSetBase';
 
 =head1 DESCRIPTION
 
-<%= $self->namespace %>::Schema::Meta::ResultSetBase is the base class for resultsets in the L<<%= $self->namespace %>> namespace.
+<%= $self->namespace %>::Schema::ResultSetBase is the base class for resultsets in the L<<%= $self->namespace %>> namespace.
 
 =head1 SEE ALSO
 

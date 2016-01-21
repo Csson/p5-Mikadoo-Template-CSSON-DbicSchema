@@ -5,14 +5,14 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::Meta::Result {
+                    package <%= $self->namespace %>::Schema::Result {
 
                         # VERSION
                         # ABSTRACT: ...
 
                         use base 'DBIx::Class::Sweeten::Result';
 
-                        sub base { $_[1] || '<%= $self->namespace %>::Schema::Meta::ResultBase' }
+                        sub base { $_[1] || '<%= $self->namespace %>::Schema::ResultBase' }
 
                         sub default_result_namespace { '<%= $self->namespace %>::Schema::Result' }
 
@@ -40,11 +40,11 @@
 
 =head1 SYNOPSIS
 
-    use <%= $self->namespace %>::Schema::Meta::Result;
+    use <%= $self->namespace %>::Schema::Result;
 
 =head1 DESCRIPTION
 
-<%= $self->namespace %>::Schema::Meta::Result is the DBIx::Class::Candy based class all result classes in the L<<%= $self->namespace %>> namespace uses.
+<%= $self->namespace %>::Schema::Result is the DBIx::Class::Candy based class all result classes in the L<<%= $self->namespace %>> namespace uses.
 
 =head1 SEE ALSO
 

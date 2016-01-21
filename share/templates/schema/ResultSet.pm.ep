@@ -5,14 +5,14 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::Meta::ResultSet {
+                    package <%= $self->namespace %>::Schema::ResultSet {
 
                         # VERSION
                         # ABSTRACT: ...
 
                         use base 'DBIx::Class::Candy::ResultSet';
 
-                        sub base { $_[1] || '<%= $self->namespace %>::Schema::Meta::ResultSetBase' }
+                        sub base { $_[1] || '<%= $self->namespace %>::Schema::ResultSetBase' }
 
 %   if($self->has_perl_version) {
                         sub perl_version { <%= $self->perl_version_short %> }
@@ -34,11 +34,11 @@
 
 =head1 SYNOPSIS
 
-    use base '<%= $self->namespace %>::Schema::Meta::ResultSet';
+    use base '<%= $self->namespace %>::Schema::ResultSet';
 
 =head1 DESCRIPTION
 
-<%= $self->namespace %>::Schema::Meta::ResultSet is the DBIx::Class::Candy based class all resultsets in the L<<%= $self->namespace %>> namespace uses.
+<%= $self->namespace %>::Schema::ResultSet is the DBIx::Class::Candy based class all resultsets in the L<<%= $self->namespace %>> namespace uses.
 
 =head1 SEE ALSO
 
