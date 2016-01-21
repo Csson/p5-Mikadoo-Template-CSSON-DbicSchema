@@ -1,7 +1,8 @@
+% use experimental qw/postderef/;
+% my $self = shift;
 %   if($self->has_perl_version) {
                     use <%= $self->perl_version %>;
 %   }
-                    use strict;
                     use warnings;
 
                     package <%= $self->namespace %>::Schema::Meta::ResultSet {
@@ -14,7 +15,7 @@
                         sub base { $_[1] || '<%= $self->namespace %>::Schema::Meta::ResultSetBase' }
 
 %   if($self->has_perl_version) {
-                        sub perl_version { $self->perl_version_short }
+                        sub perl_version { <%= $self->perl_version_short %> }
 %   }
 
                         sub experimental {

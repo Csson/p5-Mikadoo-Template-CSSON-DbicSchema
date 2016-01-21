@@ -23,11 +23,14 @@ package Mikadoo::Template::CSSON::DbicSchema {
 
         my $meta_location = path($self->location, qw<Schema Meta Dummy.pm>);
         $self->ensure_parents_exist($meta_location);
+        say $meta_location->realpath;
 
-        $self->render(path(qw/schema Schema.pm.ep/) => path($self->location, 'Schema.pm'));
+        for my $file (qw<Schema.pm Config.pm>) {
+            $self->render(path('schema', "$file.ep") => path($self->location, $file));
+        }
 
         for my $file (qw<Result.pm ResultSet.pm ResultBase.pm ResultSetBase.pm>) {
-            $self->render(path(qw<schema $file.ep>) => path($meta_location, $file));
+            $self->render(path('schema', "$file.ep") => path($self->location, 'Schema', 'Meta', $file));
         }
 =pod
 

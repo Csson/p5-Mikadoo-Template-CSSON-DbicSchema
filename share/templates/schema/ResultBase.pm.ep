@@ -1,10 +1,11 @@
+% use experimental qw/postderef/;
+% my $self = shift;
 %   if($self->has_perl_version) {
                     use <%= $self->perl_version %>;
 %   }
-                    use strict;
                     use warnings;
 
-                    package <%= $self->namespace =%>::Schema::Meta::ResultBase {
+                    package <%= $self->namespace %>::Schema::Meta::ResultBase {
 
                         # VERSION
                         # ABSTRACT: ...
@@ -13,6 +14,12 @@
 %   if($self->has_experimentals) {
                         use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
 %   }
+
+                        __PACKAGE__->load_components(qw/
+                            Helper::Row::RelationshipDWIM
+                            InflateColumn::DateTime::WithTimeZone
+                        /);
+
                     }
 
                     1;

@@ -22,6 +22,12 @@ package Mikadoo::Template::CSSON::DbicResult::Numeric {
 
         $settings->{ $_ } = 1 for @$attributes;
 
+        my @extra_attributes = qw/unsigned/;
+        for my $extra_attribute (@extra_attributes) {
+            if(delete $settings->{ $extra_attribute }) {
+                $settings->{'extra'}{ $extra_attribute } = 1;
+            }
+        }
         return $settings;
     }
 }

@@ -2,11 +2,11 @@
 
 Mikadoo::Template::CSSON::DbicResult - Short intro
 
-![Requires Perl 5.16](https://img.shields.io/badge/perl-5.16-brightgreen.svg) [![Travis status](https://api.travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema.svg?branch=master)](https://travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema)
+![Requires Perl 5.16+](https://img.shields.io/badge/perl-5.16+-brightgreen.svg) [![Travis status](https://api.travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema.svg?branch=master)](https://travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema) 
 
 # VERSION
 
-Version 0.0001, released 2015-11-04.
+Version 0.0001, released 2016-01-21.
 
 # SYNOPSIS
 

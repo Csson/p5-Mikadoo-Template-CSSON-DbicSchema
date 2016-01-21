@@ -1,10 +1,11 @@
+% use experimental qw/postderef/;
+% my $self = shift;
 %   if($self->has_perl_version) {
                     use <%= $self->perl_version %>;
 %   }
-                    use strict;
                     use warnings;
 
-                    package <%= $self->namespace =%>::Schema {
+                    package <%= $self->namespace %>::Schema {
 
                         # VERSION
                         # ABSTRACT: ...
@@ -12,14 +13,15 @@
                         our $VERSION = 1;
 
                         use base 'DBIx::Class::Sweeten::Schema';
-                        use <%= $self->namespace =%>::Config;%   if($self->has_experimentals) {
+                        use <%= $self->namespace %>::Config;
+%   if($self->has_experimentals) {
                         use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
 %   }
 
                         __PACKAGE__->load_namespaces;
 
                         sub connect {
-                            my $config = <%= $self->namespace =%>::Config->new(base => 'db');
+                            my $config = <%= $self->namespace %>::Config->new(base => 'db');
                             return shift->next::method($config->get('dsn'), $config->get('user'), $config->get('password'), $config->get('settings'));
                         }
                     }

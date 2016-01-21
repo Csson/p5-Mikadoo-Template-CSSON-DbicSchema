@@ -1,7 +1,8 @@
+% use experimental qw/postderef/;
+% my $self = shift;
 %   if($self->has_perl_version) {
                     use <%= $self->perl_version %>;
 %   }
-                    use strict;
                     use warnings;
 
                     package <%= $self->namespace %>::Config {
@@ -11,11 +12,14 @@
 
                         use Moo;
                         with 'Config::FromHash::Auto';
+
                         use Dir::Self;
 %   if($self->has_experimentals) {
                         use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
 %   }
+
                         sub package { __PACKAGE__ }
+
                         sub dir { __DIR__ }
 
                     }

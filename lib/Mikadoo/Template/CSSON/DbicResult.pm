@@ -62,6 +62,7 @@ package Mikadoo::Template::CSSON::DbicResult {
     has result_use_type => (
         is => 'rw',
         isa => Any,
+        predicate => 1,
     );
     has resultset_use_string => (
         is => 'rw',
@@ -70,6 +71,7 @@ package Mikadoo::Template::CSSON::DbicResult {
     has resultset_use_type => (
         is => 'rw',
         isa => Any,
+        predicate => 1,
     );
     has allowed_column_attributes => (
         is => 'ro',
@@ -263,51 +265,68 @@ package Mikadoo::Template::CSSON::DbicResult {
 
     sub setup_use_statements($self) {
 
-        my $global_result_class = join '::' => $self->namespace, 'Result';
-        try {
-            load $global_result_class;
-            if($global_result_class->isa('DBIx::Class::Candy')) {
-                $self->result_use_string("use $global_result_class");
-                $self->result_use_type('Candy');
+        RESULT_CLASS:
+        for my $global_result_class_name ('Result', 'Meta::Result') {
+            my $global_result_class = join '::' => $self->namespace, $global_result_class_name;
+
+            try {
+                load $global_result_class;
+                if($global_result_class->isa('DBIx::Class::Candy')) {
+                    $self->result_use_string("use $global_result_class");
+                    $self->result_use_type('Candy');
+                    return;
+                }
+                elsif($global_result_class->isa('DBIx::Class::Core')) {
+                    return if $self->has_result_use_type && $self->result_use_type eq 'Candy';
+
+                    $self->result_use_string("use parent '$global_result_class'");
+                    $self->result_use_type('Standard');
+                    return;
+                }
+                else {
+                    return if $self->has_result_use_type && any(qw/Candy Standard/) eq $self->result_use_type;
+                    $self->result_use_string("use parent 'DBIx::Class::Core'");
+                    $self->result_use_type('Core');
+                }
             }
-            elsif($global_result_class->isa('DBIx::Class::Core')) {
-                $self->result_use_string("use parent '$global_result_class'");
-                $self->result_use_type('Standard');
-            }
-            else {
-                say "Note: No custom $global_result_class class found. Inherits from DBIx::Class::Core."; 
+            catch {
+                return if $self->has_result_use_type;
                 $self->result_use_string("use parent 'DBIx::Class::Core'");
                 $self->result_use_type('Core');
-            }
+            };
         }
-        catch {
-            say "Note: No custom $global_result_class class found. Inherits from DBIx::Class::Core."; 
-            $self->result_use_string("use parent 'DBIx::Class::Core'");
-            $self->result_use_type('Core');
-        };
+        say "Found global result class of type " . $self->result_use_type;
 
-        my $global_resultset_class = join '::' => $self->namespace, 'ResultSet';
-        try {
-            load $global_resultset_class;
-            if($global_resultset_class->isa('DBIx::Class::Candy::ResultSet')) {
-                $self->resultset_use_string("use $global_resultset_class");
-                $self->resultset_use_type('Candy');
+        RESULTSET_CLASS:
+        for my $global_resultset_class_name ('ResultSet', 'Meta::ResultSet') {
+            my $global_resultset_class = join '::' => $self->namespace, $global_resultset_class_name;
+
+            try {
+                load $global_resultset_class;
+                if($global_resultset_class->isa('DBIx::Class::Candy::ResultSet')) {
+                    $self->resultset_use_string("use $global_resultset_class");
+                    $self->resultset_use_type('Candy');
+                    return;
+                }
+                elsif($global_resultset_class->isa('DBIx::Class::ResultSet')) {
+                    return if $self->has_resultset_use_type && $self->resultset_use_type eq 'Candy';
+                    $self->resultset_use_string("use parent '$global_resultset_class'");
+                    $self->resultset_use_type('Standard');
+                    return;
+                }
+                else {
+                    return if $self->has_resultset_use_type && any(qw/Candy Standard/) eq $self->resultset_use_type;
+                    $self->resultset_use_string("use parent 'DBIx::Class::ResultSet'");
+                    $self->resultset_use_type('Core');
+                }
             }
-            elsif($global_resultset_class->isa('DBIx::Class::ResultSet')) {
-                $self->resultset_use_string("use parent '$global_resultset_class'");
-                $self->resultset_use_type('Standard');
-            }
-            else {
-                say "Note: No custom $global_resultset_class class found. Inherits from DBIx::Class::ResultSet."; 
+            catch {
+                return if $self->has_resultset_use_type;
                 $self->resultset_use_string("use parent 'DBIx::Class::ResultSet'");
                 $self->resultset_use_type('Core');
-            }
+            };
         }
-        catch {
-            say "Note: No custom $global_resultset_class class found. Inherits from DBIx::Class::ResultSet."; 
-            $self->resultset_use_string("use parent 'DBIx::Class::ResultSet'");
-            $self->resultset_use_type('Core');
-        };
+        say "Found global resultset class of type " . $self->resultset_use_type;
     }
 
     sub print_columns_verbose($self) {
