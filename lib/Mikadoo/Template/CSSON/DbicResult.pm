@@ -143,7 +143,7 @@ sub initialize_directories($self) {
 
     $self->result_path($self->location->child('Result', @parts, $filename));
     $self->resultset_path($self->location->child('ResultSet', @parts, $filename));
-    
+
     $self->ensure_parents_exist($self->result_path, $self->resultset_path);
     return $self;
 }
