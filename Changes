@@ -4,7 +4,6 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [API Changes]
 
  [Bug Fixes]
-  - Quote version number in generated files.
 
  [Documentation]
 
@@ -19,6 +18,13 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [Stats & Dependency Changes]
 
  [Testing]
+
+0.0002 2016-08-30T09:54:09Z UTC
+ [Bug Fixes]
+ - Quote version number in generated files.
+
+ [Stats & Dependency Changes]
+ - 16 files changed, 77 insertions(+), 82 deletions(-)
 
 0.0001 2016-08-30T09:48:29Z UTC
  - Initial release
