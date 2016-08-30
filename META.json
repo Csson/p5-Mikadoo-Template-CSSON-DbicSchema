@@ -147,39 +147,39 @@
    "provides" : {
       "Mikadoo::Template::CSSON::Dbic" : {
          "file" : "lib/Mikadoo/Template/CSSON/Dbic.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       },
       "Mikadoo::Template::CSSON::DbicResult" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       },
       "Mikadoo::Template::CSSON::DbicResult::DecimalDetails" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult/DecimalDetails.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       },
       "Mikadoo::Template::CSSON::DbicResult::IntegerDetails" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult/IntegerDetails.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       },
       "Mikadoo::Template::CSSON::DbicResult::Numeric" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult/Numeric.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       },
       "Mikadoo::Template::CSSON::DbicResult::StringDetails" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult/StringDetails.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       },
       "Mikadoo::Template::CSSON::DbicResult::TimesDetails" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicResult/TimesDetails.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       },
       "Mikadoo::Template::CSSON::DbicSchema" : {
          "file" : "lib/Mikadoo/Template/CSSON/DbicSchema.pm",
-         "version" : "0.0001"
+         "version" : "0.0002"
       }
    },
    "release_status" : "stable",
-   "version" : "0.0001",
+   "version" : "0.0002",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.020001"
@@ -237,7 +237,6 @@
          {
             "class" : "Dist::Zilla::Plugin::RewriteVersion::Transitional",
             "config" : {
-               "Dist::Zilla::Plugin::OurPkgVersion" : {},
                "Dist::Zilla::Plugin::RewriteVersion" : {
                   "add_tarball_name" : 0,
                   "finders" : [
@@ -666,7 +665,7 @@
                   "branch" : null,
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "0.0001",
+                  "tag" : "0.0002",
                   "tag_format" : "%v",
                   "tag_message" : "Release %v%n%n%c"
                },

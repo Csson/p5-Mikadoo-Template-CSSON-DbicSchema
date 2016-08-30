@@ -4,6 +4,7 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [API Changes]
 
  [Bug Fixes]
+  - Quote version number in generated files.
 
  [Documentation]
 
