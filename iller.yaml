@@ -13,11 +13,25 @@ prereqs:
   runtime:
     requires:
       - perl: 5.016000
+      - Dir::Self
+      - File::ShareDir::Tarball
+      - Hash::Merge
+      - Mojolicious
+      - Moose::Role
+      - MooseX::App
+      - MooseX::AttributeShortcuts
+      - Path::Tiny
+      - Set::Scalar
+      - Try::Tiny
+      - Types::Path::Tiny
+      - Types::Standard
+      - experimental
+      - syntax
 
 plugins:
   - +config: Author::CSSON
     is_private: 1
-  
+
   - +replace_plugin: ShareDir
     +with: ShareDir::Tarball
 
