@@ -1,30 +1,27 @@
 # NAME
 
-Mikadoo::Template::CSSON::DbicResult - Short intro
+Mikadoo::Template::CSSON::Dbic - ...
 
-![Requires Perl 5.16+](https://img.shields.io/badge/perl-5.16+-brightgreen.svg) [![Travis status](https://api.travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema.svg?branch=master)](https://travis-ci.org/Csson/p5-Mikadoo-Template-CSSON-DbicSchema) 
+<div>
+    <p>
+    <img src="https://img.shields.io/badge/perl-5.16+-blue.svg" alt="Requires Perl 5.16+" />
+    <a href="https://travis-ci.org//"><img src="https://api.travis-ci.org//.svg?branch=master" alt="Travis status" /></a>
+    <a href="http://cpants.cpanauthors.org/release/CSSON/Mikadoo-Template-CSSON-Dbic-0.0001"><img src="http://badgedepot.code301.com/badge/kwalitee/CSSON/Mikadoo-Template-CSSON-Dbic/0.0001" alt="Distribution kwalitee" /></a>
+    <a href="http://matrix.cpantesters.org/?dist=Mikadoo-Template-CSSON-Dbic%200.0001"><img src="http://badgedepot.code301.com/badge/cpantesters/Mikadoo-Template-CSSON-Dbic/0.0001" alt="CPAN Testers result" /></a>
+    </p>
+</div>
 
 # VERSION
 
-Version 0.0001, released 2016-01-21.
-
-# SYNOPSIS
-
-    use Mikadoo::Template::DbicResult;
-
-# DESCRIPTION
-
-Mikadoo::Template::DbicResult is ...
-
-# SEE ALSO
+Version 0.0001, released 2016-08-30.
 
 # SOURCE
 
-[https://github.com/Csson/p5-Mikadoo-Template-CSSON-DbicSchema](https://github.com/Csson/p5-Mikadoo-Template-CSSON-DbicSchema)
+L<>
 
 # HOMEPAGE
 
-[https://metacpan.org/release/Mikadoo-Template-CSSON-Dbic](https://metacpan.org/release/Mikadoo-Template-CSSON-Dbic)
+L<>
 
 # AUTHOR
 
@@ -36,3 +33,15 @@ This software is copyright (c) 2015 by Erik Carlsson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+# POD ERRORS
+
+Hey! **The above document had some coding errors, which are explained below:**
+
+- Around line 28:
+
+    An empty L<>
+
+- Around line 32:
+
+    An empty L<>
