@@ -6,7 +6,7 @@ package Mikadoo::Template::CSSON::DbicResult;
 
 # ABSTRACT: Short intro
 # AUTHORITY
-our $VERSION = '0.0003';
+our $VERSION = '0.0004';
 
 use MooseX::App::Command;
 extends 'App::Mikadoo';
