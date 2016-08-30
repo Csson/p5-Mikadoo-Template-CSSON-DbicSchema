@@ -18,7 +18,7 @@ sub column_details_for_integers($self, $data_type) {
     DEFAULT:
     while(1) {
         my $reply = $self->term_get_text('Default value', { shortcuts => [{ key => '[enter]', text => "Don't set" }, { key => '!', text => 'Set as null'}]});
-        
+
         if(!defined $reply) {
             last DEFAULT;
         }
