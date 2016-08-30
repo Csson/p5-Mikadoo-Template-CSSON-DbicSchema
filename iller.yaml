@@ -29,3 +29,7 @@ doctype: weaver
 
 plugins:
   - +config: Author::CSSON
+
+  - +remove_plugin: SOURCE
+
+  - +remove_plugin: HOMEPAGE
