@@ -5,20 +5,19 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::ResultSetBase {
+                    package <%= $self->namespace %>::Schema::ResultSetBase;
 
-                        # VERSION
-                        # ABSTRACT: ...
+                    # ABSTRACT: ...
+                    # AUTHORITY
+                    our $VERSION = '0.0001';
 
-                        use base 'DBIx::Class::ResultSet';
+                    use base 'DBIx::Class::ResultSet';
 
-                        __PACKAGE__->load_components(qw/
-                            Helper::ResultSet
-                            Helper::ResultSet::OneRow
-                            Helper::ResultSet::Bare
-                        /);
-
-                    }
+                    __PACKAGE__->load_components(qw/
+                        Helper::ResultSet
+                        Helper::ResultSet::OneRow
+                        Helper::ResultSet::Bare
+                    /);
 
 1;
 

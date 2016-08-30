@@ -5,32 +5,31 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::Result {
+                    package <%= $self->namespace %>::Schema::Result;
 
-                        # VERSION
-                        # ABSTRACT: ...
+                    # ABSTRACT: ...
+                    # AUTHORITY
+                    our $VERSION = '0.0001';
 
-                        use base 'DBIx::Class::Sweeten::Result';
+                    use base 'DBIx::Class::Sweeten::Result';
 
-                        sub base { $_[1] || '<%= $self->namespace %>::Schema::ResultBase' }
+                    sub base { $_[1] || '<%= $self->namespace %>::Schema::ResultBase' }
 
-                        sub default_result_namespace { '<%= $self->namespace %>::Schema::Result' }
+                    sub default_result_namespace { '<%= $self->namespace %>::Schema::Result' }
 
 %   if($self->has_perl_version) {
-                        sub perl_version { <%= $self->perl_version_short %> }
+                    sub perl_version { <%= $self->perl_version_short %> }
 %   }
 
 %   if($self->has_experimentals) {
-                        sub experimental {
-                            [qw/
+                    sub experimental {
+                        [qw/
 %       for my $experimental ($self->all_experimentals) {
-                                <%= $experimental %>
+                            <%= $experimental %>
 %       }
-                            /];
-                        }
-%   }
-
+                        /];
                     }
+%   }
 
                     1;
 

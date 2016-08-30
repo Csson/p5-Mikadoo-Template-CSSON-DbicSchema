@@ -5,22 +5,21 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::ResultBase {
+                    package <%= $self->namespace %>::Schema::ResultBase;
 
-                        # VERSION
-                        # ABSTRACT: ...
+                    # ABSTRACT: ...
+                    # AUTHORITY
+                    our $VERSION = '0.0001';
 
-                        use base 'DBIx::Class::Sweeten::Result::Base';
+                    use base 'DBIx::Class::Sweeten::Result::Base';
 %   if($self->has_experimentals) {
-                        use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
+                    use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
 %   }
 
-                        __PACKAGE__->load_components(qw/
-                            Helper::Row::RelationshipDWIM
-                            InflateColumn::DateTime::WithTimeZone
-                        /);
-
-                    }
+                    __PACKAGE__->load_components(qw/
+                        Helper::Row::RelationshipDWIM
+                        InflateColumn::DateTime::WithTimeZone
+                    /);
 
                     1;
 

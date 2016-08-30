@@ -5,25 +5,25 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema {
+                    package <%= $self->namespace %>::Schema;
 
-                        # VERSION
-                        # ABSTRACT: ...
+                    # ABSTRACT: ...
+                    # AUTHORITY
+                    our $VERSION = '0.0001';
 
-                        our $VERSION = 1;
+                    sub schema_version { 1 }
 
-                        use base 'DBIx::Class::Sweeten::Schema';
-                        use <%= $self->namespace %>::Config;
+                    use base 'DBIx::Class::Sweeten::Schema';
+                    use <%= $self->namespace %>::Config;
 %   if($self->has_experimentals) {
-                        use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
+                    use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
 %   }
 
-                        __PACKAGE__->load_namespaces;
+                    __PACKAGE__->load_namespaces;
 
-                        sub connect {
-                            my $config = <%= $self->namespace %>::Config->new(base => 'db');
-                            return shift->next::method($config->get('dsn'), $config->get('user'), $config->get('password'), $config->get('settings'));
-                        }
+                    sub connect {
+                        my $config = <%= $self->namespace %>::Config->new(base => 'db');
+                        return shift->next::method($config->get('dsn'), $config->get('user'), $config->get('password'), $config->get('settings'));
                     }
 
                     1;

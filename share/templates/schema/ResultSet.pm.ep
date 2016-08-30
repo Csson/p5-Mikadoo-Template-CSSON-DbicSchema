@@ -5,25 +5,25 @@
 %   }
                     use warnings;
 
-                    package <%= $self->namespace %>::Schema::ResultSet {
+                    package <%= $self->namespace %>::Schema::ResultSet;
 
-                        # VERSION
-                        # ABSTRACT: ...
+                    # ABSTRACT: ...
+                    # AUTHORITY
+                    our $VERSION = '0.0001';
 
-                        use base 'DBIx::Class::Candy::ResultSet';
+                    use base 'DBIx::Class::Candy::ResultSet';
 
-                        sub base { $_[1] || '<%= $self->namespace %>::Schema::ResultSetBase' }
+                    sub base { $_[1] || '<%= $self->namespace %>::Schema::ResultSetBase' }
 
 %   if($self->has_perl_version) {
-                        sub perl_version { <%= $self->perl_version_short %> }
+                    sub perl_version { <%= $self->perl_version_short %> }
 %   }
 
-                        sub experimental {
-                            [qw/
-                                signatures
-                                postderef
-                            /];
-                        }
+                    sub experimental {
+                        [qw/
+                            signatures
+                            postderef
+                        /];
                     }
 
 1;
