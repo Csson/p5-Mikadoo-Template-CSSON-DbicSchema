@@ -16,17 +16,16 @@ prereqs:
 
 plugins:
   - +config: Author::CSSON
+    is_private: 1
   
-  - +extend_plugin: TravisYML
-    perl_version: 5.16 5.18 5.20 5.22
-
   - +replace_plugin: ShareDir
     +with: ShareDir::Tarball
+
+  - +extend_plugin: UploadToStratopan
+    repo: TheFirst
 
 ---
 doctype: weaver
 
 plugins:
   - +config: Author::CSSON
-
-  - +remove_plugin: Splint
