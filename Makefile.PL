@@ -23,7 +23,22 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "MIN_PERL_VERSION" => "5.016000",
   "NAME" => "Mikadoo::Template::CSSON::Dbic",
-  "PREREQ_PM" => {},
+  "PREREQ_PM" => {
+    "Dir::Self" => 0,
+    "File::ShareDir::Tarball" => 0,
+    "Hash::Merge" => 0,
+    "Mojolicious" => 0,
+    "Moose::Role" => 0,
+    "MooseX::App" => 0,
+    "MooseX::AttributeShortcuts" => "0.028",
+    "Path::Tiny" => "0.072",
+    "Set::Scalar" => 0,
+    "Try::Tiny" => "0.24",
+    "Types::Path::Tiny" => "0.005",
+    "Types::Standard" => "1.000005",
+    "experimental" => 0,
+    "syntax" => 0
+  },
   "TEST_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
@@ -39,11 +54,25 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "Dir::Self" => 0,
   "ExtUtils::MakeMaker" => 0,
+  "File::ShareDir::Tarball" => 0,
   "File::Spec" => 0,
+  "Hash::Merge" => 0,
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
-  "Test::More" => "0.96"
+  "Mojolicious" => 0,
+  "Moose::Role" => 0,
+  "MooseX::App" => 0,
+  "MooseX::AttributeShortcuts" => "0.028",
+  "Path::Tiny" => "0.072",
+  "Set::Scalar" => 0,
+  "Test::More" => "0.96",
+  "Try::Tiny" => "0.24",
+  "Types::Path::Tiny" => "0.005",
+  "Types::Standard" => "1.000005",
+  "experimental" => 0,
+  "syntax" => 0
 );
 
 

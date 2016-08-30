@@ -114,7 +114,21 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "5.016000"
+            "Dir::Self" : "0",
+            "File::ShareDir::Tarball" : "0",
+            "Hash::Merge" : "0",
+            "Mojolicious" : "0",
+            "Moose::Role" : "0",
+            "MooseX::App" : "0",
+            "MooseX::AttributeShortcuts" : "0.028",
+            "Path::Tiny" : "0.072",
+            "Set::Scalar" : "0",
+            "Try::Tiny" : "0.24",
+            "Types::Path::Tiny" : "0.005",
+            "Types::Standard" : "1.000005",
+            "experimental" : "0",
+            "perl" : "5.016000",
+            "syntax" : "0"
          }
       },
       "test" : {
