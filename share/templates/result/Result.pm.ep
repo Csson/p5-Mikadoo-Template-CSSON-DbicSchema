@@ -40,6 +40,7 @@
 %   else {
                     <%= $self->result_use_string %>;
 %   }
+                    use DBIx::Class::Sweeten -all;
 %   if($self->has_experimentals) {
                     use experimental qw/<%= join ' ' => $self->all_experimentals %>/;
 %   }
