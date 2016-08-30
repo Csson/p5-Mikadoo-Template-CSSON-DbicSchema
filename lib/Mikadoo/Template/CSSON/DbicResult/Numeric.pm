@@ -2,34 +2,34 @@ use 5.20.0;
 use strict;
 use warnings;
 
-package Mikadoo::Template::CSSON::DbicResult::Numeric {
+package Mikadoo::Template::CSSON::DbicResult::Numeric;
 
-    # VERSION
-    # ABSTRACT: Short intro
+# ABSTRACT: Short intro
+# AUTHORITY
+# VERSION
 
-    use Moose::Role;
-    use syntax 'junction';
-    use Mojo::Util 'dumper';
-    use experimental qw/postderef signatures/;
+use Moose::Role;
+use syntax 'junction';
+use Mojo::Util 'dumper';
+use experimental qw/postderef signatures/;
 
-    sub setup_numeric_attributes($self) {
+sub setup_numeric_attributes($self) {
 
-        # If attributes are added, also update the template.
-        my $attributes = [map { split m/ \+ / } $self->term_get_multi('Attributes', ['is_auto_increment + unsigned', qw/is_auto_increment unsigned is_nullable zerofill none/], ['none'])->@*];
-        my $settings = {
-            is_numeric => 1,
-        };
+    # If attributes are added, also update the template.
+    my $attributes = [map { split m/ \+ / } $self->term_get_multi('Attributes', ['is_auto_increment + unsigned', qw/is_auto_increment unsigned is_nullable zerofill none/], ['none'])->@*];
+    my $settings = {
+        is_numeric => 1,
+    };
 
-        $settings->{ $_ } = 1 for @$attributes;
+    $settings->{ $_ } = 1 for @$attributes;
 
-        my @extra_attributes = qw/unsigned/;
-        for my $extra_attribute (@extra_attributes) {
-            if(delete $settings->{ $extra_attribute }) {
-                $settings->{'extra'}{ $extra_attribute } = 1;
-            }
+    my @extra_attributes = qw/unsigned/;
+    for my $extra_attribute (@extra_attributes) {
+        if(delete $settings->{ $extra_attribute }) {
+            $settings->{'extra'}{ $extra_attribute } = 1;
         }
-        return $settings;
     }
+    return $settings;
 }
 
 1;

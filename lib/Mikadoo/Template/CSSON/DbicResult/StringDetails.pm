@@ -2,56 +2,56 @@ use 5.20.0;
 use strict;
 use warnings;
 
-package Mikadoo::Template::CSSON::DbicResult::StringDetails {
+package Mikadoo::Template::CSSON::DbicResult::StringDetails;
 
-    # VERSION
-    # ABSTRACT: Short intro
+# ABSTRACT: Short intro
+# AUTHORITY
+# VERSION
 
-    use Moose::Role;
-    use syntax 'junction';
-    use experimental qw/postderef signatures/;
+use Moose::Role;
+use syntax 'junction';
+use experimental qw/postderef signatures/;
 
-    sub column_details_for_strings($self, $data_type) {
+sub column_details_for_strings($self, $data_type) {
 
-        my $settings = {
-            is_numeric => 0,
-        };
+    my $settings = {
+        is_numeric => 0,
+    };
 
-        DEFAULT:
-        while(1) {
-            my $reply = $self->term_get_text('Default value', { shortcuts => [{ key => '[enter]', text => "Don't set" }, { key => '!', text => 'Set as null'}, { key => '_', text => 'Set as empty string'}]});
-            
-            if(!defined $reply) {
-                last DEFAULT;
-            }
-            elsif($reply eq '!') {
-                $settings->{'default_value'} = undef;
-                last DEFAULT if $reply eq '!';
-            }
-            elsif($reply eq '_') {
-                $settings->{'default_value'} = '';
-                last DEFAULT;
-            }
-            $settings->{'default_value'} = $reply;
+    DEFAULT:
+    while(1) {
+        my $reply = $self->term_get_text('Default value', { shortcuts => [{ key => '[enter]', text => "Don't set" }, { key => '!', text => 'Set as null'}, { key => '_', text => 'Set as empty string'}]});
+        
+        if(!defined $reply) {
             last DEFAULT;
         }
-
-        if(any(qw/char varchar text binary varbinary blob/) eq $data_type) {
-            MAX_LENGTH:
-            while(1) {
-                my $reply = $self->term_get_text('Max display width', { shortcuts => [{ key => '[enter]', text => "Don't set"}]});
-                last MAX_LENGTH if !defined $reply;
-    
-                if($reply !~ m{\D} && $reply >= 0) {
-                    $settings->{'size'} = $reply;
-                    last MAX_LENGTH;
-                }
-                say 'Illegal value';
-            }
+        elsif($reply eq '!') {
+            $settings->{'default_value'} = undef;
+            last DEFAULT if $reply eq '!';
         }
-
-        return $settings;
+        elsif($reply eq '_') {
+            $settings->{'default_value'} = '';
+            last DEFAULT;
+        }
+        $settings->{'default_value'} = $reply;
+        last DEFAULT;
     }
+
+    if(any(qw/char varchar text binary varbinary blob/) eq $data_type) {
+        MAX_LENGTH:
+        while(1) {
+            my $reply = $self->term_get_text('Max display width', { shortcuts => [{ key => '[enter]', text => "Don't set"}]});
+            last MAX_LENGTH if !defined $reply;
+
+            if($reply !~ m{\D} && $reply >= 0) {
+                $settings->{'size'} = $reply;
+                last MAX_LENGTH;
+            }
+            say 'Illegal value';
+        }
+    }
+
+    return $settings;
 }
 
 1;
