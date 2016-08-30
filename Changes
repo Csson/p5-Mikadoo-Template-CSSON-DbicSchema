@@ -8,7 +8,6 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [Documentation]
 
  [Enhancements]
-  - Add 'use DBIx::Class::Sweeten -all' to generated result classes.
 
  [New Features]
 
@@ -19,6 +18,13 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [Stats & Dependency Changes]
 
  [Testing]
+
+0.0003 2016-08-30T10:16:43Z UTC
+ [Enhancements]
+ - Add 'use DBIx::Class::Sweeten -all' to generated result classes.
+
+ [Stats & Dependency Changes]
+ - 9 files changed, 9 insertions(+), 8 deletions(-)
 
 0.0002 2016-08-30T09:54:09Z UTC
  [Bug Fixes]
