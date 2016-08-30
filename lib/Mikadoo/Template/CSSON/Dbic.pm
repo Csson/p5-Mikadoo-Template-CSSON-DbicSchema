@@ -5,6 +5,6 @@ package Mikadoo::Template::CSSON::Dbic;
 
 # ABSTRACT: ...
 # AUTHORITY
-# VERSION
+our $VERSION = '0.0002';
 
 1;
