@@ -6,7 +6,7 @@ package Mikadoo::Template::CSSON::DbicResult::Numeric;
 
 # ABSTRACT: Short intro
 # AUTHORITY
-our $VERSION = '0.0005';
+our $VERSION = '0.0006';
 
 use Moose::Role;
 use syntax 'junction';
