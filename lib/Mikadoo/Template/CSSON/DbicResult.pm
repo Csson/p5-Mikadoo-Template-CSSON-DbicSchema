@@ -267,13 +267,13 @@ sub column_details_for_type($self, $data_type) {
 sub setup_use_statements($self) {
 
     RESULT_CLASS:
-    for my $global_result_class_name ('Result', 'Result') {
+    for my $global_result_class_name ('Result') {
         my $global_result_class = join '::' => $self->namespace, $global_result_class_name;
 
         try {
             load $global_result_class;
             if($global_result_class->isa('DBIx::Class::Candy')) {
-                $self->result_use_string("use $global_result_class");
+                $self->result_use_string("use $global_result_class -components => [qw/\n/]");
                 $self->result_use_type('Candy');
                 return;
             }
@@ -291,21 +291,19 @@ sub setup_use_statements($self) {
             }
         }
         catch {
-            return if $self->has_result_use_type;
-            $self->result_use_string("use parent 'DBIx::Class::Core'");
-            $self->result_use_type('Core');
+            die "! Maybe needs PERL5LIB=../..?\n$_";
         };
     }
     say "Found global result class of type " . $self->result_use_type;
 
     RESULTSET_CLASS:
-    for my $global_resultset_class_name ('ResultSet', 'ResultSet') {
+    for my $global_resultset_class_name ('ResultSet') {
         my $global_resultset_class = join '::' => $self->namespace, $global_resultset_class_name;
 
         try {
             load $global_resultset_class;
             if($global_resultset_class->isa('DBIx::Class::Candy::ResultSet')) {
-                $self->resultset_use_string("use $global_resultset_class");
+                $self->resultset_use_string("use $global_resultset_class -components => [qw/\n/]");
                 $self->resultset_use_type('Candy');
                 return;
             }
