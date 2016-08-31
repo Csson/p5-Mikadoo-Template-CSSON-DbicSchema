@@ -6,7 +6,7 @@ package Mikadoo::Template::CSSON::DbicResult::DecimalDetails;
 
 # ABSTRACT: Short intro
 # AUTHORITY
-our $VERSION = '0.0004';
+our $VERSION = '0.0005';
 
 use Moose::Role;
 use experimental qw/postderef signatures/;
