@@ -4,7 +4,6 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [API Changes]
 
  [Bug Fixes]
-  - Better handling if the expected Result class can't be found (die instead of silently skip).
 
  [Documentation]
 
@@ -19,6 +18,14 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [Stats & Dependency Changes]
 
  [Testing]
+
+0.0005 2016-08-31T14:00:06Z UTC
+ [Bug Fixes]
+ - Better handling if the expected Result class can't be found (die instead
+   of silently skip).
+
+ [Stats & Dependency Changes]
+ - 8 files changed, 13 insertions(+), 15 deletions(-)
 
 0.0004 2016-08-31T13:45:28Z UTC
  [Bug Fixes]
