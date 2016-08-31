@@ -4,6 +4,7 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [API Changes]
 
  [Bug Fixes]
+  - Better handling if the expected Result class can't be found (die instead of silently skip).
 
  [Documentation]
 

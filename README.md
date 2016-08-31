@@ -6,14 +6,14 @@ Mikadoo::Template::CSSON::Dbic - ...
     <p>
     <img src="https://img.shields.io/badge/perl-5.16+-blue.svg" alt="Requires Perl 5.16+" />
     <a href="https://travis-ci.org//"><img src="https://api.travis-ci.org//.svg?branch=master" alt="Travis status" /></a>
-    <a href="http://cpants.cpanauthors.org/release/CSSON/Mikadoo-Template-CSSON-Dbic-0.0004"><img src="http://badgedepot.code301.com/badge/kwalitee/CSSON/Mikadoo-Template-CSSON-Dbic/0.0004" alt="Distribution kwalitee" /></a>
-    <a href="http://matrix.cpantesters.org/?dist=Mikadoo-Template-CSSON-Dbic%200.0004"><img src="http://badgedepot.code301.com/badge/cpantesters/Mikadoo-Template-CSSON-Dbic/0.0004" alt="CPAN Testers result" /></a>
+    <a href="http://cpants.cpanauthors.org/release/CSSON/Mikadoo-Template-CSSON-Dbic-0.0005"><img src="http://badgedepot.code301.com/badge/kwalitee/CSSON/Mikadoo-Template-CSSON-Dbic/0.0005" alt="Distribution kwalitee" /></a>
+    <a href="http://matrix.cpantesters.org/?dist=Mikadoo-Template-CSSON-Dbic%200.0005"><img src="http://badgedepot.code301.com/badge/cpantesters/Mikadoo-Template-CSSON-Dbic/0.0005" alt="CPAN Testers result" /></a>
     </p>
 </div>
 
 # VERSION
 
-Version 0.0004, released 2016-08-31.
+Version 0.0005, released 2016-08-31.
 
 # AUTHOR
 
