@@ -7,4 +7,6 @@ package Mikadoo::Template::CSSON::Dbic;
 # AUTHORITY
 our $VERSION = '0.0004';
 
+use Moose;
+
 1;
