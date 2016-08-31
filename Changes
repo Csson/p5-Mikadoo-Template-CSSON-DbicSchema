@@ -4,6 +4,7 @@ Revision history for Mikadoo-Template-DbicSchema-CSSON
  [API Changes]
 
  [Bug Fixes]
+  - ::Dbic should also use Moose (but maybe remove it?)
 
  [Documentation]
 
